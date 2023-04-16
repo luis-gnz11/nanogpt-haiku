@@ -1,0 +1,5 @@
+/venv/
+novelas_ejemplares.txt
+/.aim/
+/__pycache__/
+*.pyc
