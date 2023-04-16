@@ -6,7 +6,7 @@ The implementation is based on Karpathy's lecture on Transformers (he chose PyTo
 - https://github.com/karpathy/ng-video-lecture
 - https://www.youtube.com/watch?v=kCc8FmEb1nY&t=6035s
 
-Haiku uses Jax as the underlying library, the new functional-style autograd library from Google, which is based on XLA, a new Coogle JIT compiler.
+Haiku uses Jax as the underlying library, the new functional-style autograd library from Google, which is based on XLA, a new Google JIT compiler.
 
 Unlike PyTorch, with Jax, the function implementing the model is a pure so you can have explicit control over the model's state by passing and returning the parameters and other state variables to the function that implements the model.
 
@@ -27,20 +27,20 @@ Just clone the repo, create a virtual env, upgrade pip, install CPU or CUDA Jax 
 The Aim library is used in the code to manage different experiments info (see: https://github.com/aimhubio/aim).
 
 # Training
-1. Change the CONFIG params in train.py and the model hyperparameters in HPARAMS in the transformer.py file.
+1. Change the CONFIG params in `train.py` and the model hyperparameters in HPARAMS in the `transformer.py` file.
 2. Train with: `python train.py`
 
 # Pretrained params
-You can find pretrained params in the file `params/params/params.c1069c8d186b4b4e8852ebfe.pkl.min_val.pkl`. This is the file loaded by default by eval.py. 
+You can find pretrained params in the file `params/params/params.c1069c8d186b4b4e8852ebfe.pkl.min_val.pkl`. This is the file loaded by default by `eval.py`. 
 
-These params were generated with the default CONFIG and HPARAMS variables found in the train.py and eval.py files. The model was trained for two hours on an Nvidia 3060 GPU achieving a minimum cross entropy loss error of 1.29 for the training dataset and 1.44 for the validation dataset:
+These params were generated with the default CONFIG and HPARAMS variables found in the `train.py` and `eval.py` files. The model was trained for two hours on an Nvidia 3060 GPU achieving a minimum cross entropy loss error of 1.29 for the training dataset and 1.44 for the validation dataset:
 
 ![Train and valudation cross entropy loss](train_validation_loss.png)
 
 # Evaluation
 Simply run `python generate.py`.
 
-This will generate text in the OCSL style, starting from the sentence in the file eval_context.txt used as the initial context. You can modify this file or the CONFIG variable in eval.py to get other results.
+This will generate text in the OCSL style, starting from the sentence in the file eval_context.txt used as the initial context. You can modify this file or the CONFIG variable in `eval.py` to get other results.
 
 The initial pseudorandom seed is based on the current UNIX epoch, so we get the different text with every run. Fix its value in the CONFIG variable to get deterministic text results.
 
