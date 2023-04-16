@@ -5,7 +5,7 @@ from jax.nn import log_softmax, one_hot
 import optax
 import jax.numpy as jnp
 from transformer import f, HPARAMS
-from typing import Tuple, NamedTuple, List
+from typing import Tuple, NamedTuple, List, Optional, Union
 from functools import partial
 from aim import Run
 import pickle
@@ -16,19 +16,19 @@ class Config(NamedTuple):
   prng_seed:int
   source_file:str
   last_i:int  # last iteration, used to restore a previous training run, use 0 to start from scratch
-  last_picklefile_run_uid:str  # uid of the last run that generated a pickle file, used to restore a previous training run, use None to start from scratch
+  last_picklefile_run_uid:Optional[str]  # uid of the last run that generated a pickle file, used to restore a previous training run, use None to start from scratch
 
 CONFIG = Config(
   B = 32,
   max_iters = 15000,
   prng_seed = 6436,
   source_file = 'novelas_ejemplares.txt',
-  last_i = 6000,
-  last_picklefile_run_uid = "c1069c8d186b4b4e8852ebfe"
+  last_i = 0,
+  last_picklefile_run_uid = None
 )
 
 class TrainingState(NamedTuple):
-  params: hk.Params
+  params: Union[hk.Params, optax.Params]
   state: hk.State
   optimizer_state: optax.OptState
   prng_key: jax.random.PRNGKeyArray
@@ -130,14 +130,10 @@ def main_() -> None:
   aimlogger["config"] = dict(CONFIG._asdict())
   aimlogger["hparams"] = dict(HPARAMS._asdict())
 
-  with open(CONFIG.source_file, "r", encoding="utf-8") as fdata: nes = fdata.read()
-  # nes_tks:Array = jnp.asarray(enc.encode(nes), dtype='bfloat16')
-  # n = int(0.9*len(nes_tks))
-  # nes_tks_train = nes_tks[:n]
-  # nes_tks_val = nes_tks[n:]
+  with open(CONFIG.source_file, "r", encoding="utf-8") as fdata: dataset_txt = fdata.read()
 
   # here are all the unique characters that occur in this text
-  chars = sorted(list(set(nes)))
+  chars = sorted(list(set(dataset_txt)))
   vocab_size = len(chars)
   
   print_run_info(aimlogger, vocab_size, chars)
@@ -149,7 +145,7 @@ def main_() -> None:
   decode = lambda l: ''.join([itos[i] for i in l]) # decoder: take a list of integers, output a string
 
   # train and test splits
-  data = jnp.asarray(encode(nes), dtype='bfloat16')
+  data = jnp.asarray(encode(dataset_txt), dtype='bfloat16')
   n = int(0.9*len(data)) # first 90% will be train, rest val
   train_data = data[:n]
   val_data = data[n:]
