@@ -42,7 +42,7 @@ Simply run `python generate.py`.
 
 This will generate text in the OCSL style, starting from the sentence in the file eval_context.txt used as the initial context. You can modify this file or the `CONFIG` variable in `eval.py` to get other results.
 
-The initial pseudorandom seed is based on the current UNIX epoch, so we get the different text with every run. Fix its value in the `CONFIG` variable to get deterministic text results.
+The initial pseudo-random seed is based on the current UNIX epoch, so we get the different text with every run. Fix its value in the `CONFIG` variable to get deterministic text results.
 
 Given the relatively small Transformer model implemented, and also the very small dataset used, a single small novel (~18000 lines and ~1 million characters), 5.4 million trainable params, and within two hours of training on an Nvidia 3070, the network has been able to learn and generate text, although without any apparent meaning, in the style of the OCSL.
 
@@ -75,7 +75,7 @@ The model generates:
 - Including dropout:
   - Added a dropout as a final layer of the feed forward transformation, just before the residual connection
   - At the end of the multi-head self attention
-  - Inside the multi-head masked self attention: we can dropout after the softmax, so we can rqndomly prevent some of the nodes/token from "communicating"
+  - Inside the multi-head masked self attention: we can dropout after the softmax, so we can randomly prevent some of the nodes/token from "communicating"
 - The encoder is implemented but is optional (not neccesary for our mini language model).
 
 # References
