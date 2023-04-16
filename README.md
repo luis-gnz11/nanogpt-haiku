@@ -1,6 +1,6 @@
 # nanogpt-haiku
 
-Clean, simple, and mostly functional implementation of a mini-language model with a non-vanilla Transformer implemented from scratch using the Haiku library from Deepmind.
+Simple and functional implementation of a mini-language model with a non-vanilla Transformer implemented from scratch using the Haiku library from Deepmind.
 
 The implementation is based on Karpathy's lecture on Transformers (he chose PyTorch instead of Jax for his implementation).
 - https://github.com/karpathy/ng-video-lecture
@@ -33,7 +33,7 @@ The Aim library is used in the code to manage different experiments info (see: h
 # Pretrained params
 You can find pretrained params in the file `params/params/params.c1069c8d186b4b4e8852ebfe.pkl.min_val.pkl`. This is the file loaded by default by eval.py. 
 
-These params were generated with the default CONFIG and HPARAMS variables found in the train.py and eval.py files. The model was trained for two hours on an Nvidia 3070 GPU achieving a minimum cross entropy loss error of 1.29 for the training dataset and 1.44 for the validation dataset:
+These params were generated with the default CONFIG and HPARAMS variables found in the train.py and eval.py files. The model was trained for two hours on an Nvidia 3060 GPU achieving a minimum cross entropy loss error of 1.29 for the training dataset and 1.44 for the validation dataset:
 
 ![Train and valudation cross entropy loss](train_validation_loss.png)
 
