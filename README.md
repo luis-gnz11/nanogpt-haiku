@@ -8,7 +8,7 @@ The implementation is based on Karpathy's lecture on Transformers (he chose PyTo
 
 Haiku uses Jax as the underlying library, the new functional-style autograd library from Google, which is based on XLA, a new Google JIT compiler.
 
-Unlike PyTorch, with Jax, the function implementing the model is a pure so you can have explicit control over the model's state by passing and returning the parameters and other state variables to the function that implements the model.
+Unlike PyTorch, in Jax, the model is implemented with a pure function so you can have explicit control over the model's state by passing and returning the parameters and other state variables to the function that implements the model.
 
 # Trained to generate Old Castilian Spanish
 The model was trained to generate Old Castilian Spanish Language (OCSL), using as dataset the "Exemplary Novels" by Miguel de Cervantes, published in 1613. You can find the complete dataset used in the file `novelas_ejemplares.txt` in this repo.
