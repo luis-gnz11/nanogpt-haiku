@@ -17,10 +17,13 @@ The model was trained to generate Old Castilian Spanish Language (OCSL), using a
 Just clone the repo, create a virtual env, upgrade pip, install CPU or CUDA Jax 0.4.7 or the version according to your installed CUDA installation (see: https://github.com/google/jax#installation) and install the requirements.txt file.
 
     - git clone https://github.com/luis-gnz11/nanogpt-haiku
+    - cd nanogpt-haiku
     - python3 -m venv venv; source venv/bin/activate
     - pip install pip --upgrade
-    - pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html  # if using CUDA11 (check the jax site for other install options)
-    - pip install --upgrade "jax[cpu]==0.4.7"  # if using CPU
+    - # if using CUDA11 (check the jax site for other CUDA versions):
+      - pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html  
+    - # if using CPU:
+      - pip install --upgrade "jax[cpu]==0.4.7"
     - pip install -r requirements.txt
 
 #  ML Ops
