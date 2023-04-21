@@ -41,7 +41,7 @@ These params were generated with the default `CONFIG` and `HPARAMS` variables fo
 ![Train and valudation cross entropy loss](train_validation_loss.png)
 
 # Evaluation
-Simply run `python generate.py`.
+Simply run `python eval.py`.
 
 This will generate text in the OCSL style, starting from the sentence in the file eval_context.txt used as the initial context. You can modify this file or the `CONFIG` variable in `eval.py` to get other results.
 
